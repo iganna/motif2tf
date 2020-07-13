@@ -7,7 +7,7 @@ from functools import reduce
 
 def get_best_score(seq, ppm):
     """
-    This fucntion calculated the fighest score
+    TThis function calculated the highest score
     that can be obtained for the sequence based on the ppm
     :param seq: sequence
     :param ppm: position probability matrix
@@ -25,7 +25,7 @@ def get_best_score(seq, ppm):
     return score
 
 
-path_jaspar = 'data/'
+path_jaspar = 'jaspar/'
 path_motifs = 'motifs/'
 
 # Read ppm in jaspar format
