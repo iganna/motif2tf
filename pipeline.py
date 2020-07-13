@@ -8,7 +8,7 @@ from functools import reduce
 
 def get_best_score(seq, ppm):
     """
-    TThis function calculated the highest score
+    This function calculates the highest score
     that can be obtained for the sequence based on the ppm
     :param seq: sequence
     :param ppm: position probability matrix
