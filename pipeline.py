@@ -44,7 +44,6 @@ for f in files_jaspar:
 # Read motifs
 files_motifs = glob.glob(path_motifs + '*.fasta')
 records = [item for f in files_motifs for item in list(SeqIO.parse(f, "fasta"))]
-list(SeqIO.parse(files_motifs[1], "fasta"))
 
 # Get best ppm for each motif
 best_motifs = []
