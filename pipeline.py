@@ -37,14 +37,14 @@ ppms = []
 pfms = []
 for f in files_jaspar:
     with open(f) as fh:
-        pfms += [motifs.read(fh, 'jaspar')]
-        ppms += [motifs.matrix.PositionWeightMatrix('ACGT', pfms[-1].counts)]
+        for m in motifs.parse(fh, "jaspar"):
+            pfms += [m]
+            ppms += [motifs.matrix.PositionWeightMatrix('ACGT', pfms[-1].counts)]
 
 # Read motifs
 files_motifs = glob.glob(path_motifs + '*.fasta')
 records = [item for f in files_motifs for item in list(SeqIO.parse(f, "fasta"))]
 list(SeqIO.parse(files_motifs[1], "fasta"))
-
 
 # Get best ppm for each motif
 best_motifs = []
@@ -53,8 +53,9 @@ for record in records:
     max_id = ppm_scores.index(max(ppm_scores))
     best_motifs += [ record.name.split('_') + [pfms[max_id].matrix_id, pfms[max_id].name, max(ppm_scores)]]
 
-
-
+# Save
+best_motifs.sort(key=lambda x: x[-1], reverse=True)  # sorting by pwm score
 with open(file_out, 'w') as f:
     wr = csv.writer(f)
     wr.writerows(best_motifs)
+
